@@ -1,3 +1,21 @@
+### Development Phase
+
+This project is currently in active development and should be considered a work in progress.
+
+### Implemented Features
+
+- ✅ Basic tweet CRUD operations
+- ✅ Caching infrastructure
+- ✅ Basic API documentation
+
+### In Progress
+
+- 🚧 Implement User System
+- 🚧 Implement Group CRUD and integrate to tweet system
+- 🚧 Implement Permission System and integrate to tweet and Cash System
+- 🚧 Advanced permission inheritance
+- 🚧 Enhanced monitoring and logging
+
 ## Installation Guide
 
 ### Prerequisites
