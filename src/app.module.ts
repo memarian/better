@@ -1,4 +1,5 @@
 import { TweetModule } from '@modules/tweet/tweet.module';
+import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SwaggerModule } from '@nestjs/swagger';
@@ -12,17 +13,7 @@ import { LoggerModule } from 'nestjs-pino';
         authSource: 'admin',
       }),
     }),
-    // RedisModule.forRootAsync({
-    //   useFactory: () => ({
-    //     type: 'single',
-    //     host: 'redis',
-    //     url: 'redis://localhost:6379',
-    //     options: {
-    //       password: 'redis_password',
-    //       port: 6379,
-    //     },
-    //   }),
-    // }),
+
     LoggerModule.forRootAsync({
       useFactory: () => {
         return {
@@ -45,20 +36,20 @@ import { LoggerModule } from 'nestjs-pino';
       },
     }),
 
-    // BullModule.forRootAsync({
-    //   useFactory: () => {
-    //     return {
-    //       connection: {
-    //         host: 'redis', // TODO: read from environment && validation
-    //         port: 6379,
-    //         password: 'redis_password',
-    //       },
-    //     };
-    //   },
-    // }),
-    // BullModule.registerQueue({
-    //   name: 'PERMISSION_QUEUE',
-    // }),
+    BullModule.forRootAsync({
+      useFactory: () => {
+        return {
+          connection: {
+            host: 'localhost', // TODO: read from environment && validation
+            port: 6379,
+            password: 'redis_password',
+          },
+        };
+      },
+    }),
+    BullModule.registerQueue({
+      name: 'PERMISSION_QUEUE',
+    }),
     SwaggerModule,
     TweetModule,
   ],

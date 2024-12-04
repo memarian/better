@@ -17,14 +17,12 @@ export class TweetService {
     authorId: string,
     createTweetDto: CreateTweetDto,
   ): Promise<Tweet> {
-    const tweet = {
+    const tweetData = {
       ...createTweetDto,
       authorId,
-      // createdAt: new Date(),
-      // updatedAt: new Date(),
     };
 
-    const created = await this.tweetRepository.create(tweet);
+    const tweet: Tweet = await this.tweetRepository.create(tweetData);
 
     // if (createTweetDto.permissions) {
     //   await this.permissionService.createPermission({
@@ -34,7 +32,7 @@ export class TweetService {
     //   });
     // }
 
-    return created;
+    return tweet;
   }
 
   async getTweet(id: string, userId: string): Promise<Tweet> {

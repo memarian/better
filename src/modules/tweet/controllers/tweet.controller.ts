@@ -1,3 +1,4 @@
+import { Tweet } from '@domain/tweet/entities/tweet.entity';
 import { CreateTweetDto } from '@modules/tweet/dtos';
 import { TweetService } from '@modules/tweet/services/tweet.service';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
@@ -11,7 +12,7 @@ export class TweetController {
   async createTweet(
     // @User() user: UserEntity,
     @Body() createTweetDto: CreateTweetDto,
-  ) {
+  ): Promise<Tweet> {
     // return this.tweetService.createTweet(user.id, createTweetDto);
     return this.tweetService.createTweet('1', createTweetDto);
   }

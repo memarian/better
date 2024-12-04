@@ -22,20 +22,21 @@ WORKDIR /app
 
 
 FROM base AS development
+ENV NODE_ENV=development
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 COPY . .
-CMD ["pnpm", "run", "start:dev"]
+CMD ["pnpm","start:dev"]
 
 FROM base AS builder
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm run build
+RUN pnpm  build
 
 # Production stage
 FROM base AS production
-ENV NODE_ENV production
+ENV NODE_ENV=production
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --prod --frozen-lockfile
 COPY --from=builder /app/dist ./dist
@@ -45,4 +46,4 @@ USER node
 
 EXPOSE 3000
 
-CMD ["pnpm", "run", "start:prod"]
+CMD ["pnpm", "start:prod"]

@@ -7,7 +7,7 @@ import { BaseMapper } from './base.mapper';
 export class TweetMapper extends BaseMapper<Tweet, TweetDocument> {
   toDomain(tweetDoc: TweetDocument): Tweet {
     return new Tweet({
-      // id: tweetDoc._id.toString(),
+      id: tweetDoc.id,
       content: tweetDoc.content,
       authorId: tweetDoc.authorId,
       parentId: tweetDoc.parentId,

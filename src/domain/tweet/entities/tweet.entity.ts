@@ -5,6 +5,8 @@ export class Tweet extends BaseEntity {
   authorId: string;
   parentId?: string;
   metadata: TweetMetadata;
+  deletedAt?: Date;
+  isDeleted: boolean;
 
   constructor(partial: Partial<Tweet>) {
     super(partial);
@@ -17,6 +19,12 @@ export class Tweet extends BaseEntity {
     this.content = content;
     this.metadata.isEdited = true;
     this.metadata.editedAt = new Date();
+    this.update();
+  }
+
+  delete(): void {
+    this.deletedAt = new Date();
+    this.isDeleted = true;
     this.update();
   }
 

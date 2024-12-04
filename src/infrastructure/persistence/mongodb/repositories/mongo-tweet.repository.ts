@@ -73,8 +73,10 @@ export class MongoTweetRepository extends TweetRepository {
     throw new NotImplementedException();
   }
 
-  create(entity: Partial<Tweet>): Promise<Tweet> {
-    throw new NotImplementedException();
+  async create(entity: Partial<Tweet>): Promise<Tweet> {
+    const tweet = this.mapper.toPersistence(entity as Tweet);
+    const createdTweet: TweetDocument = await this.tweetModel.create(tweet);
+    return this.mapper.toDomain(createdTweet);
   }
 
   update(id: string, entity: Partial<Tweet>): Promise<Tweet> {
